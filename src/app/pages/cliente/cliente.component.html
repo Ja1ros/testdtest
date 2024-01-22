@@ -1,0 +1,349 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Listado Colaboradores</h4>
+        <div class="text-right" *ngIf="rol == 'Admin' || rol == 'User'">
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Agregar
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table
+            id="client-table"
+            datatable
+            [dtOptions]="dtOptions"
+            class="row-border hover"
+          ></table>
+        </div>
+
+        <!-- <div class="table-responsive">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            class="table"
+          >
+            <thead class="text-primary">
+              <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Cédula</th>
+                <th class="text-center">Cliente</th>
+                <th class="text-center">Teléfono</th>
+                <th class="text-center">Dirección</th>
+                <th class="text-center">Email</th>
+                <th *ngIf="rol == 'Admin'" class="text-center">Contraseña</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cliente of clientes; index as i">
+                <td class="text-center">{{ cliente.ID }}</td>
+                <td class="text-center">{{ cliente.CedRuc }}</td>
+                <td class="text-center">
+                  {{ cliente.Nombres }} {{ cliente.Apellidos }}
+                </td>
+                <td class="text-center">{{ cliente.Telefono }}</td>
+                <td class="text-center">{{ cliente.Direccion }}</td>
+                <td class="text-center">{{ cliente.Correo }}</td>
+                <td *ngIf="rol == 'Admin'" class="text-center">
+                  {{ cliente.Contra.substring(0, 10) }} ...
+                </td>
+                <td class="text-center">
+                  <span *ngIf="cliente.Estado == 1" class="badge bg-info"
+                    >Activo</span
+                  >
+                  <span *ngIf="cliente.Estado != 1" class="badge bg-danger"
+                    >Inactivo</span
+                  >
+                </td>
+                <td>
+                  <button
+                    (click)="EditarCliente(cliente)"
+                    type="button"
+                    class="btn btn-info btn-sm"
+                    data-toggle="modal"
+                    data-target="#exampleModalEditar"
+                  >
+                    <i class="nc-icon nc-tag-content"></i>
+                  </button>
+
+                  <button
+                    id="btnEliminar"
+                    (click)="EliminarCliente(cliente)"
+                    class="btn btn-danger btn-sm"
+                  >
+                    <i class="nc-icon nc-simple-remove"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Cliente</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group position-relative has-icon-left">
+          <input
+            name="txtCed"
+            placeholder="Cédula"
+            [(ngModel)]="cliente.cedula"
+            placeholder="1800000111"
+            onkeypress="return event.charCode >= 48"
+            min="1"
+            class="form-control"
+            id="txtCed"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            type="text"
+            maxlength="10"
+          />
+        </div>
+
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtNom"
+            type="text"
+            [(ngModel)]="cliente.nombres"
+            placeholder="Nombres"
+            placeholder="Nombres"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtApe"
+            type="text"
+            placeholder="Apellidos"
+            [(ngModel)]="cliente.apellidos"
+            placeholder="Apellidos"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            name="txtTel"
+            onkeypress="return event.charCode >= 48"
+            [(ngModel)]="cliente.telefono"
+            placeholder="0963357853"
+            min="1"
+            placeholder="Tel/Cel"
+            class="form-control"
+            id="txtTel"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            type="text"
+            maxlength="10"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtDir"
+            type="text"
+            placeholder="Dirección"
+            [(ngModel)]="cliente.direccion"
+            placeholder="Ambato Av El Rey"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtCorreo"
+            type="text"
+            placeholder="Correo"
+            required
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+            [(ngModel)]="cliente.email"
+            placeholder="usuario@gmail.com"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtPassword"
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="cliente.pass"
+            placeholder="Password"
+            required
+            pattern="^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          #closeModal
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          (click)="GuardarCliente()"
+          class="btn btn-primary"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModalEditar"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalEditar"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Cliente</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group position-relative has-icon-left">
+          <input
+            name="txtCed"
+            placeholder="Cédula"
+            [(ngModel)]="cliente.cedula"
+            placeholder="1800000111"
+            onkeypress="return event.charCode >= 48"
+            min="1"
+            class="form-control"
+            id="txtCed"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            type="text"
+            maxlength="10"
+          />
+        </div>
+
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtNom"
+            type="text"
+            [(ngModel)]="cliente.nombres"
+            placeholder="Nombres"
+            placeholder="Nombres"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtApe"
+            type="text"
+            placeholder="Apellidos"
+            [(ngModel)]="cliente.apellidos"
+            placeholder="Apellidos"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            name="txtTel"
+            onkeypress="return event.charCode >= 48"
+            [(ngModel)]="cliente.telefono"
+            placeholder="0963357853"
+            min="1"
+            placeholder="Tel/Cel"
+            class="form-control"
+            id="txtTel"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            type="text"
+            maxlength="10"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtDir"
+            type="text"
+            placeholder="Dirección"
+            [(ngModel)]="cliente.direccion"
+            placeholder="Ambato Av El Rey"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtCorreo"
+            type="text"
+            placeholder="Correo"
+            [(ngModel)]="cliente.email"
+            placeholder="usuario@gmail.com"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group position-relative has-icon-left">
+          <input
+            id="txtPassword"
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="cliente.pass"
+            placeholder="Usuario1"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          #closeEditar
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="button" (click)="Editar()" class="btn btn-primary">
+          Editar Cliente
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
