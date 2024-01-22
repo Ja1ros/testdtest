@@ -6,6 +6,5 @@
 export const environment = {
   production: false,
   //API:'http://localhost:3000/api/'
-  //API:"https://apifact-production.up.railway.app/api/"
   API: 'https://productsapi-gh6n.onrender.com/api/'
 };

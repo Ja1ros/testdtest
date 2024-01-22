@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { ILogin, IResp, User } from "../Models/Interfaces";
 import { AuthService } from "../Services/auth.service";
+import { error } from "console";
 
 @Component({
   selector: "app-login",
@@ -105,6 +106,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('rol',JSON.stringify(usuario.RollName));
         localStorage.setItem('usuario',JSON.stringify(usuario.userName));
         this.router.navigateByUrl('/dashboard');
+        
       },
       (err) => {
         if (err["error"].errors != undefined) {
