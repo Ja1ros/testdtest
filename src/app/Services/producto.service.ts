@@ -48,7 +48,7 @@ export class ProductoService {
     const formData = new FormData();
     console.log(file)
     formData.append('image', file)
-    return this.http.post('https://api.imgbb.com/1/upload?key=c3204e7155118e2d483e93072ea5bf7e',formData )
+    return this.http.post('https://api.imgbb.com/1/upload?key=5ce77e0698e3e45d85a2262bed67554e',formData )
   }
 
 

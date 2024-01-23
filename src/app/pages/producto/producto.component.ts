@@ -81,15 +81,15 @@ export class ProductoComponent implements OnInit {
           title: "Codigo",
           data: "Codigo",
         },
-        {
-          title: "Peso",
-          data: "Peso",
-          render: $.fn.dataTable.render.number(",", ".", 4),          
-        },
-        {
-          title: "Stock",
-          data: "Stock",
-        },
+        // {
+        //   title: "Peso",
+        //   data: "Peso",
+        //   render: $.fn.dataTable.render.number(",", ".", 4),          
+        // },
+        // {
+        //   title: "Stock",
+        //   data: "Stock",
+        // },
         {
           title: "Categoria",
           data: "ID_CAT",
@@ -97,7 +97,7 @@ export class ProductoComponent implements OnInit {
       ],
       columnDefs: [
         {
-          targets: 8,
+          targets: 6,
           title: "Estado",
           data: "Estado",
           render: function (data, type, row) {
@@ -107,7 +107,7 @@ export class ProductoComponent implements OnInit {
           },
         },
         {
-          targets: 9,
+          targets: 7,
           title: "Opciones",
           data: null,
           render: function (data, type, row) {

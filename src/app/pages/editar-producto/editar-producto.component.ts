@@ -63,20 +63,6 @@ export class EditarProductoComponent implements OnInit {
     }
   }
 
-  // esEditar() {
-  //   if (this.id !== null) {
-  //     this.titulo = "Ingresar peso del producto";
-  //     this._productoService.obtenerProducto(this.id).subscribe((data) => {
-  //       this.productoForm.setValue({
-  //         producto: data.nombre,
-  //         codigo: data.codigo,
-  //         peso: data.peso,
-  //         precio: data.precio,
-  //       });
-  //     });
-  //     //this.habilitarEdicion();
-  //   }
-  // }
   calcularCodigoBarras() {
 
     let codigo = this.productoForm.get("codigo")?.value;

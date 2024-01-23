@@ -12,7 +12,7 @@ export const ROUTESADM: RouteInfo[] = [
   {
     path: "/miperfil",
     title: "Mi Perfil",
-    icon: "nc-icon nc-album-2",
+    icon: "nc-icon nc-badge",
     class: "",
   },
   { path: "/clientes", title: "Colaboradores", icon: "nc-single-02", class: "" },
@@ -25,26 +25,19 @@ export const ROUTESADM: RouteInfo[] = [
   {
     path: "/productos",
     title: "Productos",
-    icon: "nc-icon nc-tag-content",
+    icon: "nc-icon nc-align-center",
     class: "",
   },
-
   {
     path: "/productos2",
-    title: "Productos2",
+    title: "Carnes",
     icon: "nc-icon nc-tag-content",
     class: "",
   },
-  /*{
-    path: "/crearFactura",
-    title: "Facturar",
-    icon: "nc-icon nc-delivery-fast",
-    class: "",
-  },*/
   {
     path: "/generarCBR",
     title: "Generar Codigo",
-    icon: "nc-tile-56",
+    icon: "nc-credit-card",
     class: "",
   },
   
@@ -66,30 +59,21 @@ export const ROUTESUSUARIO: RouteInfo[] = [
     class: "",
   },
   {
-    path: "/productos2",
-    title: "Productos2",
-    icon: "nc-icon nc-tag-content",
-    class: "",
-  }/*
-  {
-    path: "/crearFactura",
-    title: "Facturar",
-    icon: "nc-icon nc-delivery-fast",
-    class: "",
-  },
-  {
     path: "/generarCBR",
-    title: "Lista Facturas",
+    title: "Generar Codigo",
     icon: "nc-tile-56",
     class: "",
-  },*/
-
- 
+  } 
 ];
 
 export const ROUTESCLIENTE: RouteInfo[] = [
   { path: "/dashboard", title: "Inicio", icon: "nc-bank", class: "" },
-  { path: "/table", title: "Lista Facturas", icon: "nc-tile-56", class: "" },
+  {
+    path: "/generarCBR",
+    title: "Generar Codigo",
+    icon: "nc-tile-56",
+    class: "",
+  }
 ];
 
 @Component({
@@ -100,6 +84,7 @@ export const ROUTESCLIENTE: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   public menuItems: any[];
   ngOnInit() {
+    //this.menuItems = ROUTESADM.filter((menuItem) => menuItem); servicio si se quita jwt
     const rol = JSON.parse(localStorage.getItem("rol"));
     switch (rol) {
       case "Admin":
