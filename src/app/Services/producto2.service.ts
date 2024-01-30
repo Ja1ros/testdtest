@@ -9,7 +9,7 @@ import { IRequestProduct, IRespProduct, Root } from 'app/Models/InterfacesProduc
   providedIn: 'root'
 })
 export class ProductoService {
-  url = 'http://localhost:3000/api/productos/';
+  url = 'https://productsapi-gh6n.onrender.com/api/';
   
   constructor(private http: HttpClient) { }
 
@@ -47,7 +47,7 @@ export class ProductoService {
 
   obtenerProducto(id: string) {
     console.log(id)
-    return this.http.get<Root>(`http://localhost:3000/api/products/buscador/${id}`);
+    return this.http.get<Root>(`https://productsapi-gh6n.onrender.com/api/products/buscador/${id}`);
   }
 
 

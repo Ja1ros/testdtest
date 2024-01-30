@@ -36,6 +36,7 @@ export class EditarProductoComponent implements OnInit {
       codigo: [{ value: "", disabled: true }, Validators.required],
       peso: ["", Validators.required],
       precio: ["", Validators.required],
+      codigoBarras: ["", Validators.required],
     });
     this.id = this.aRouter.snapshot.paramMap.get("id");
     
@@ -48,11 +49,8 @@ export class EditarProductoComponent implements OnInit {
   obtenerProducto() {
     if (this.id !== null) {
       this._productoService.obtenerProducto(this.id).subscribe(data => {
-        
-
         this.producto = data;
-        console.log('rrrrrr',  this.producto)
-
+        //console.log('rrrrrr',  this.producto)
         this.productoForm.patchValue({
           nombre: data.Nombre,
           codigo: data.Codigo,
@@ -67,7 +65,7 @@ export class EditarProductoComponent implements OnInit {
 
     let codigo = this.productoForm.get("codigo")?.value;
     codigo = codigo.toString();
-    console.log(codigo, codigo.length)
+    //console.log(codigo, codigo.length)
 
     if(codigo.length < 4){
 
@@ -80,12 +78,13 @@ export class EditarProductoComponent implements OnInit {
       codigo = prefix + codigo;
     }
 
-    console.log("CODIGO FIX", codigo)
+   // console.log("CODIGO FIX", codigo)
 
     this.codigoBarras = this.codigoBarrasService.calcularCodigoBarras(
       codigo,
       this.productoForm.get("peso")?.value,
-      this.productoForm.get("precio")?.value
+      this.productoForm.get("precio")?.value,
     );
   }
+
 }

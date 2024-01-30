@@ -27,7 +27,6 @@ import { VerFacturaComponent } from './pages/ver-factura/ver-factura.component';
 import { CrearFacturaComponent } from './pages/crear-factura/crear-factura.component';
 import { UsersComponent } from './users/users.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
-
 // import filepond module
 import { FilePondModule, registerPlugin } from 'ngx-filepond';
 
@@ -68,7 +67,7 @@ registerPlugin(FilePondPluginFileValidateType);
     HttpClientModule,
     FilePondModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
