@@ -28,11 +28,11 @@ export class ProductoComponent implements OnInit {
     nombre: "",
     img: "",
     precio: 0,
-    peso: 0,
-    stock: 0,
+    peso: 1,
+    stock: 1,
     estado: 1,
-    codigo: 0,
-    categoria: 0
+    codigo: "",
+    categoria: 1
   };
 
   @ViewChild("closeModalProducto") closeModal: ElementRef;
@@ -52,8 +52,6 @@ export class ProductoComponent implements OnInit {
       },
       language: {
         url: "https://cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-        
-        //url: "https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"
       },
       columns: [
         {
@@ -68,7 +66,7 @@ export class ProductoComponent implements OnInit {
           title: "Imagen",
           data: "ImgUrl",
           render: function (data) {
-            return `<img src="${data}" width="120" height="120" class="rounded mx-auto d-block" alt="No se puede mostrar la imágen">`;
+            return `<img src="${data}" width="120" height="120" class="rounded mx-auto d-block" alt="No se puede mostrar la imagen">`;
           },
         },
         {
@@ -165,7 +163,7 @@ export class ProductoComponent implements OnInit {
 
   GuardarProducto() {
 
-    console.log("Valor actual de this.producto.precio:", this.producto.precio);
+    //console.log("Valor actual de this.producto.precio:", this.producto.precio);
     
      if(!this.validarProducto()){
       return;
@@ -217,7 +215,7 @@ export class ProductoComponent implements OnInit {
         this.editarP();
       }
     }
-    console.log("Precio después de la edición y antes de la subida:", this.producto.precio);
+    //console.log("Precio después de la edición y antes de la subida:", this.producto.precio);
   }
 
   SaveProduct(producto: IRequestProduct) {
@@ -232,7 +230,7 @@ export class ProductoComponent implements OnInit {
           peso: 0,
           stock: 0,
           estado: 1,
-          codigo: 0,
+          codigo: "",
           categoria: 0,
         };
         this.pondFiles = [];
@@ -260,7 +258,7 @@ export class ProductoComponent implements OnInit {
         }
       }
     );
-    console.log(producto.precio)
+    console.log(producto)
   }
 
   @ViewChild("myPond") myPond: any;
@@ -396,7 +394,7 @@ export class ProductoComponent implements OnInit {
     this.producto.codigo = producto.Codigo;
     this.producto.categoria = producto.ID_CAT;
 
-    console.log("Valor actual de producto.precio:", this.producto.precio);
+    //console.log("Valor actual de producto.precio:", this.producto.precio);
   }
 
   editarP(){
@@ -411,7 +409,7 @@ export class ProductoComponent implements OnInit {
             peso: 0,
             stock: 0,
             estado: 1,
-            codigo: 0,
+            codigo: "",
           categoria: 0,
           };
           await this.reload();
@@ -462,7 +460,7 @@ export class ProductoComponent implements OnInit {
             peso: 0,
             stock: 0,
             estado: 1,
-            codigo: 0,
+            codigo: "",
           categoria: 0,
           };
           await this.reload();

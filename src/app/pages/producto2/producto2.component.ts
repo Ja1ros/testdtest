@@ -31,7 +31,7 @@ export class Producto2Component implements OnInit {
     peso: 0,
     stock: 0,
     estado: 1,
-    codigo: 0,
+    codigo: "",
     categoria: 0
   };
 
@@ -244,7 +244,7 @@ export class Producto2Component implements OnInit {
           peso: 0,
           stock: 0,
           estado: 1,
-          codigo: 0,
+          codigo: "",
           categoria: 0,
         };
         this.pondFiles = [];
@@ -423,7 +423,7 @@ export class Producto2Component implements OnInit {
             peso: 0,
             stock: 0,
             estado: 1,
-            codigo: 0,
+            codigo: "",
           categoria: 0,
           };
           await this.reload();
@@ -474,7 +474,7 @@ export class Producto2Component implements OnInit {
             peso: 0,
             stock: 0,
             estado: 1,
-            codigo: 0,
+            codigo: "",
           categoria: 0,
           };
           await this.reload();

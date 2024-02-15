@@ -10,6 +10,8 @@ import { IRequestProduct, IRespProduct, Root } from 'app/Models/InterfacesProduc
 })
 export class ProductoService {
   url = 'https://productsapi-gh6n.onrender.com/api/';
+  //url = 'http://localhost:3000/api/';
+  
   
   constructor(private http: HttpClient) { }
 
@@ -48,6 +50,7 @@ export class ProductoService {
   obtenerProducto(id: string) {
     console.log(id)
     return this.http.get<Root>(`https://productsapi-gh6n.onrender.com/api/products/buscador/${id}`);
+    //return this.http.get<Root>(`http://localhost:3000/api/products/buscador/${id}`);
   }
 
 

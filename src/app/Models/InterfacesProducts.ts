@@ -6,7 +6,7 @@ export interface ResponseProduct {
     Peso?: number;
     Stock?: number;
     Estado?: number;
-    Codigo?: number;
+    Codigo?: string;
     ID_CAT?: number;
 }
 
@@ -24,7 +24,7 @@ export interface IRequestProduct {
     peso?: number
     stock?: number
     estado?: number
-    codigo?: number
+    codigo?: string
     categoria?: number
   }
 
@@ -52,7 +52,7 @@ export interface Root {
     Peso?: number
     Stock?: number
     Estado?: number
-    Codigo?: number
+    Codigo?: string
     ID_CAT?: number
   }
 
