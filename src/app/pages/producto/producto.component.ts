@@ -169,11 +169,6 @@ export class ProductoComponent implements OnInit {
       return false;
     }
 
-    if (this.producto.stock <= 0) {
-      this.showNotification("top", "center", 1, "Ingrese el stock ");
-      return false;
-    }
-
     if (this.producto.categoria <= 0) {
       this.showNotification("top", "center", 1, "Ingrese la categoria ");
       return false;
@@ -432,7 +427,7 @@ export class ProductoComponent implements OnInit {
             img: "",
             precio: 0,
             peso: 1,
-            stock: 0,
+            stock: 1,
             estado: 1,
             codigo: "",
           categoria: 1,
