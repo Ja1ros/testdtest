@@ -29,7 +29,6 @@ import { UsersComponent } from './users/users.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 // import filepond module
 import { FilePondModule, registerPlugin } from 'ngx-filepond';
-
 // import and register filepond file type validation plugin
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm';
 import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
@@ -51,7 +50,7 @@ registerPlugin(FilePondPluginFileValidateType);
     CrearFacturaComponent,
     UsersComponent,
     MiPerfilComponent,
-    EditarProductoComponent
+    EditarProductoComponent,
   ],
   imports: [
     BrowserAnimationsModule,

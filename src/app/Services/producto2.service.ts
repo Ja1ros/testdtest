@@ -9,8 +9,8 @@ import { IRequestProduct, IRespProduct, Root } from 'app/Models/InterfacesProduc
   providedIn: 'root'
 })
 export class ProductoService {
-  url = 'https://apiproducts-ksqp.onrender.com/api/';
-  //url = 'http://localhost:3000/api/';
+  //url = 'https://apiproducts-ksqp.onrender.com/api/';
+  url = 'http://localhost:3000/api/';
   
   
   constructor(private http: HttpClient) { }
@@ -26,7 +26,7 @@ export class ProductoService {
   }
 
   eliminarProducto(id: string): Observable<any> {
-    return this.http.delete(`${this.url}${id}`);
+    return this.http.delete(`${this.URL}${id}`);
   }
 
   getProductosFac(){
@@ -49,13 +49,13 @@ export class ProductoService {
 
   obtenerProducto(id: string) {
     console.log(id)
-    return this.http.get<Root>(`https://apiproducts-ksqp.onrender.com/api/products/buscador/${id}`);
-    //return this.http.get<Root>(`http://localhost:3000/api/products/buscador/${id}`);
+    //return this.http.get<Root>(`https://apiproducts-ksqp.onrender.com/api/products/buscador/${id}`);
+    return this.http.get<Root>(`http://localhost:3000/api/products/buscador/${id}`);
   }
 
 
   editarProducto(id: string, producto: Producto): Observable<Producto> {
-    return this.http.put<Producto>(`${this.url}${id}`, producto);
+    return this.http.put<Producto>(`${this.URL}${id}`, producto);
   }
 
   uploadImage(file:any){

@@ -46,6 +46,7 @@
     "jquery": "3.5.1",
     "jsbarcode": "^3.11.6",
     "moment": "2.29.1",
+    "ngx-barcode": "^0.3.0",
     "ngx-filepond": "^6.0.1",
     "ngx-toastr": "14.3.0",
     "numeral": "^2.0.6",

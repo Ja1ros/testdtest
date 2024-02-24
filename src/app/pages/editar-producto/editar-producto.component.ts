@@ -12,6 +12,10 @@ import { CodigoBarrasService } from "app/Services/codigo.service";
 import { ProductoService } from "app/Services/producto2.service";
 import { ToastrService } from "ngx-toastr";
 
+import * as JsBarcode from 'jsbarcode';
+import { ChangeDetectorRef } from '@angular/core';
+
+
 @Component({
   selector: "app-editar-producto",
   templateUrl: "./editar-producto.component.html",
@@ -22,14 +26,18 @@ export class EditarProductoComponent implements OnInit {
   titulo = "Editar producto";
   id: string | null;
   codigoBarras: string = "";
+  //codigoBarras: any;
+  codigoBarrasImageUrl: string = "";
   producto: Root = { }; // Inicializa la propiedad producto
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
     private _productoService: ProductoService,
     private codigoBarrasService: CodigoBarrasService,
-    private aRouter: ActivatedRoute
+    private aRouter: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {
     this.productoForm = this.fb.group({
       nombre: [{ value: "", disabled: true }, Validators.required],
@@ -39,8 +47,8 @@ export class EditarProductoComponent implements OnInit {
       codigoBarras: ["", Validators.required],
     });
     this.id = this.aRouter.snapshot.paramMap.get("id");
-    
   }
+
 
   ngOnInit(): void {
     this.obtenerProducto()
@@ -70,7 +78,6 @@ export class EditarProductoComponent implements OnInit {
     if(codigo.length < 4){
 
       const i = 4 - codigo.length
-      
       let prefix = "";
       for (let index = 0; index < i; index++) {
         prefix += "0"
@@ -78,13 +85,39 @@ export class EditarProductoComponent implements OnInit {
       codigo = prefix + codigo;
     }
 
+    const peso = this.productoForm.get("peso")?.value;
+    const precio = this.productoForm.get("precio")?.value;
+    const precioTotal = peso * precio;
+
+    this.productoForm.patchValue({
+      precioTotal: precioTotal
+    });
+
+    // Realiza la detección de cambios manualmente
+    this.cdr.detectChanges();
+
    // console.log("CODIGO FIX", codigo)
+
+    // this.codigoBarras = this.codigoBarrasService.calcularCodigoBarras(
+    //   codigo,
+    //   this.productoForm.get("peso")?.value,
+    //   this.productoForm.get("precio")?.value,
+    // );    
 
     this.codigoBarras = this.codigoBarrasService.calcularCodigoBarras(
       codigo,
-      this.productoForm.get("peso")?.value,
-      this.productoForm.get("precio")?.value,
-    );
-  }
+      peso,
+      precioTotal, // Usa el precioTotal en lugar de precio
+    ); 
+    // Genera el código de barras usando JsBarcode
+    JsBarcode("#barcode", this.codigoBarras);
 
+    // Actualiza el valor del código de barras en el formulario
+    this.productoForm.patchValue({
+      codigoBarras: this.codigoBarras,
+      precioTotal: precioTotal
+    });
+    console.log("Precio total calculado:", precioTotal);
+    //console.log("Código de barras generado:", this.codigoBarras);
+  }
 }

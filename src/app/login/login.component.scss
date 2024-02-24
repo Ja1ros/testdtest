@@ -54,8 +54,8 @@
 
   body {
     font-family: Arial, sans-serif;
-    background-image: url('/assets/img/Mega.jpg'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ubicación de tu imagen */
-    background-size: cover; /* Escala la imagen para que cubra todo el fondo */
+    background-image: url('/assets/img/login.jpg'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ubicación de tu imagen */
+    background-size:cover; /* Escala la imagen para que cubra todo el fondo */
     background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
     background-attachment: fixed; /* Mantiene la imagen de fondo fija mientras se desplaza la página */
     margin: 0;
@@ -63,7 +63,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 110vh;
 }
 
 .login-container {

@@ -30,7 +30,6 @@
               "src/assets/css/demo.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.min.css",
               "node_modules/filepond/dist/filepond.min.css"
-              
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

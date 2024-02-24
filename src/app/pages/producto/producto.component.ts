@@ -132,9 +132,30 @@ export class ProductoComponent implements OnInit {
     };
   }
 
+  onCodigoKeyDown(event: KeyboardEvent) {
+    const keyCode = event.keyCode;
+    if ((keyCode < 48 || keyCode > 57) && keyCode !== 8 && keyCode !== 9 && keyCode !== 37 && keyCode !== 39) {
+      event.preventDefault();
+    }
+  }
+
+  validarCodigo() {
+    const codigoRegex = /^[0-9]+$/; // Expresión regular para permitir solo números
+
+    if (!codigoRegex.test(this.producto.codigo)) {
+      this.showNotification("top", "center", 1, "Ingrese un código válido (solo números)");
+      return false;
+    }
+    return true;
+  }
+
   validarProducto() {
     if (this.producto.nombre.length < 3) {
       this.showNotification("top", "center", 1, "Ingrese el nombre ");
+      return false;
+    }
+
+    if (!this.validarCodigo()) {
       return false;
     }
 
@@ -159,6 +180,10 @@ export class ProductoComponent implements OnInit {
     }
 
     return true;
+  }
+
+  selectCategoria(categoriaId: number) {
+    this.producto.categoria = categoriaId;
   }
 
   GuardarProducto() {
@@ -227,11 +252,11 @@ export class ProductoComponent implements OnInit {
           nombre: "",
           img: "",
           precio: 0,
-          peso: 0,
+          peso: 1,
           stock: 0,
           estado: 1,
           codigo: "",
-          categoria: 0,
+          categoria: 1,
         };
         this.pondFiles = [];
         this.myPond.removeFiles()
@@ -266,7 +291,7 @@ export class ProductoComponent implements OnInit {
   pondOptions = {
     class: "my-filepond",
     multiple: false,
-    labelIdle: "Arrastre su archivo aqui...",
+    labelIdle: "Ingrese su archivo aqui...",
     acceptedFileTypes: "image/jpeg, image/png",
   };
 
@@ -406,11 +431,11 @@ export class ProductoComponent implements OnInit {
             nombre: "",
             img: "",
             precio: 0,
-            peso: 0,
+            peso: 1,
             stock: 0,
             estado: 1,
             codigo: "",
-          categoria: 0,
+          categoria: 1,
           };
           await this.reload();
           this.closeModal.nativeElement.click(); //<-- here
