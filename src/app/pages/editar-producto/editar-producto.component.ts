@@ -79,26 +79,25 @@ export class EditarProductoComponent implements OnInit {
       codigo = prefix + codigo;
     }
 
-    const peso = this.productoForm.get("peso")?.value;
-    const precio = this.productoForm.get("precio")?.value;
-    const precioTotal = peso * precio;
-    this.productoForm.patchValue({
-      precioTotal: precioTotal
-    });
+     const peso = this.productoForm.get("peso")?.value;
+     const precio = this.productoForm.get("precio")?.value;
+    // const precioTotal = peso * precio;
+    // console.log(peso)
+    // console.log(precio)
+    // console.log("precioTotal: "+precioTotal)
+    // this.productoForm.patchValue({
+    //   precioTotal: precioTotal
+    // });
 
     this.cdr.detectChanges();
     this.codigoBarras = this.codigoBarrasService.calcularCodigoBarras(
-      codigo,
-      peso,
-      precioTotal,
-    ); 
+      codigo, peso, precio);
 
     JsBarcode("#barcode", this.codigoBarras);
     this.productoForm.patchValue({
       codigoBarras: this.codigoBarras,
-      precioTotal: precioTotal
     });
-    console.log("Precio total calculado:", precioTotal);
+    //console.log("Precio total calculado:", precioTotal);
     //console.log("Código de barras generado:", this.codigoBarras);
   }
 }

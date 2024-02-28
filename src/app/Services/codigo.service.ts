@@ -20,7 +20,9 @@ export class CodigoBarrasService {
     const parteDecimal = partes[1] || "";
     let nuevoprimerDecimal = 0;
     let nuevoSegundoDecimal = 0;
-  //  console.log(parteDecimal);
+    console.log('peso: '+ peso, precio)
+    console.log('multi :'+multi)
+    console.log(parteDecimal);
   //  return "Hola"
 
     if (parteDecimal.length >= 3) {
@@ -47,10 +49,10 @@ export class CodigoBarrasService {
         }
       } else {
         const segundoDecimal = parseInt(parteDecimal[1], 10);
-        // console.log('2do2',segundoDecimal)
+         console.log('2do2',segundoDecimal)
 
         const primerDecimal = parseInt(parteDecimal[0], 10);
-        // console.log('1er',primerDecimal)
+         console.log('1er',primerDecimal)
 
         if (parteEnteramulti < 10) {
           let resultado = `26${codigo}000${parteEntera}${primerDecimal}${segundoDecimal}`;
