@@ -28,12 +28,12 @@ export const ROUTESADM: RouteInfo[] = [
     icon: "nc-icon nc-align-center",
     class: "",
   },
-  {
-    path: "/productos2",
-    title: "Carnes",
-    icon: "nc-icon nc-tag-content",
-    class: "",
-  },
+  // {
+  //   path: "/productos2",
+  //   title: "Carnes",
+  //   icon: "nc-icon nc-tag-content",
+  //   class: "",
+  // },
   {
     path: "/generarCBR",
     title: "Generar Codigo",

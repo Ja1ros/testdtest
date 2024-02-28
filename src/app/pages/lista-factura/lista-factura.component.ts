@@ -71,15 +71,15 @@ export class ListaFacturaComponent implements OnInit, AfterViewInit {
           title: "Imagen",
           data: "ImgUrl",
           render: function (data) {
-            return `<img src="${data}" width="120" height="120" class="rounded mx-auto d-block" alt="No se puede mostrar la imágen">`;
+            return `<img src="${data}" width="150" height="150" class="rounded mx-auto d-block" alt="No se puede mostrar la imágen">`;
           },
         },
-        {
-          title: "Precio",
-          data: "Precio",
-          render: $.fn.dataTable.render.number(",", ".", 2, "$"),
-          type: "currency",
-        },
+        // {
+        //   title: "Precio",
+        //   data: "Precio",
+        //   render: $.fn.dataTable.render.number(",", ".", 2, "$"),
+        //   type: "currency",
+        // },
         {
           title: "Codigo",
           data: "Codigo",
@@ -89,14 +89,10 @@ export class ListaFacturaComponent implements OnInit, AfterViewInit {
           data: "Peso",
           render: $.fn.dataTable.render.number(",", ".", 4),
         },
-        // {
-        //   title: "Stock",
-        //   data: "Stock",
-        // }
       ],
       columnDefs: [
         {
-          targets: 6,
+          targets: 5,
           title: "Estado",
           data: "Estado",
           render: function (data, type, row) {
@@ -106,7 +102,7 @@ export class ListaFacturaComponent implements OnInit, AfterViewInit {
           },
         },
         {
-          targets: 7,
+          targets: 6,
           title: "Opciones",
           data: null,
           render: function (data, type, row) {
@@ -117,7 +113,7 @@ export class ListaFacturaComponent implements OnInit, AfterViewInit {
             class="btn btn-info btn-sm"
             
           >
-            <i class="nc-icon nc-bullet-list-67"></i>
+            <i class="nc-icon nc-cart-simple"></i>
           </button>
   
           </button>`;

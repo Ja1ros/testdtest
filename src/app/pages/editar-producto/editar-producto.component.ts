@@ -11,7 +11,6 @@ import { Producto } from "app/Models/producto";
 import { CodigoBarrasService } from "app/Services/codigo.service";
 import { ProductoService } from "app/Services/producto2.service";
 import { ToastrService } from "ngx-toastr";
-
 import * as JsBarcode from 'jsbarcode';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -26,9 +25,8 @@ export class EditarProductoComponent implements OnInit {
   titulo = "Editar producto";
   id: string | null;
   codigoBarras: string = "";
-  //codigoBarras: any;
   codigoBarrasImageUrl: string = "";
-  producto: Root = { }; // Inicializa la propiedad producto
+  producto: Root = { };
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +46,6 @@ export class EditarProductoComponent implements OnInit {
     });
     this.id = this.aRouter.snapshot.paramMap.get("id");
   }
-
 
   ngOnInit(): void {
     this.obtenerProducto()
@@ -70,13 +67,10 @@ export class EditarProductoComponent implements OnInit {
   }
 
   calcularCodigoBarras() {
-
     let codigo = this.productoForm.get("codigo")?.value;
     codigo = codigo.toString();
     //console.log(codigo, codigo.length)
-
     if(codigo.length < 4){
-
       const i = 4 - codigo.length
       let prefix = "";
       for (let index = 0; index < i; index++) {
@@ -88,31 +82,18 @@ export class EditarProductoComponent implements OnInit {
     const peso = this.productoForm.get("peso")?.value;
     const precio = this.productoForm.get("precio")?.value;
     const precioTotal = peso * precio;
-
     this.productoForm.patchValue({
       precioTotal: precioTotal
     });
 
-    // Realiza la detección de cambios manualmente
     this.cdr.detectChanges();
-
-   // console.log("CODIGO FIX", codigo)
-
-    // this.codigoBarras = this.codigoBarrasService.calcularCodigoBarras(
-    //   codigo,
-    //   this.productoForm.get("peso")?.value,
-    //   this.productoForm.get("precio")?.value,
-    // );    
-
     this.codigoBarras = this.codigoBarrasService.calcularCodigoBarras(
       codigo,
       peso,
-      precioTotal, // Usa el precioTotal en lugar de precio
+      precioTotal,
     ); 
-    // Genera el código de barras usando JsBarcode
-    JsBarcode("#barcode", this.codigoBarras);
 
-    // Actualiza el valor del código de barras en el formulario
+    JsBarcode("#barcode", this.codigoBarras);
     this.productoForm.patchValue({
       codigoBarras: this.codigoBarras,
       precioTotal: precioTotal

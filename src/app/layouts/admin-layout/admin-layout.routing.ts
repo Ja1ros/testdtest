@@ -24,7 +24,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "clientes", canActivate: [AuthGuard], component: ClienteComponent },
   { path: "usuarios", canActivate: [AuthGuard], component: UsuarioComponent },
   { path: "productos", canActivate: [AuthGuard], component: ProductoComponent },
-  { path: "productos2", canActivate: [AuthGuard], component: Producto2Component },
+  //{ path: "productos2", canActivate: [AuthGuard], component: Producto2Component },
   {
     path: "crearFactura",
     canActivate: [AuthGuard],
