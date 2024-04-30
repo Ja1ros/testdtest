@@ -92,6 +92,7 @@ export class ProductoComponent implements OnInit {
         {
           title: "Categoria",
           data: "ID_CAT",
+          className: "text-center"
         },
       ],
       columnDefs: [
